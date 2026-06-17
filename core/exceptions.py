@@ -60,10 +60,9 @@ def custom_exception_handler(exc, context):
         http_status = status.HTTP_429_TOO_MANY_REQUESTS
 
     else:
-        message = "Something went wrong. Please try again."
-        code = "SERVER_ERROR"
+        message = str(exc.detail) if hasattr(exc, "detail") else "Something went wrong."
+        code = exc.default_code if hasattr(exc, "default_code") else "SERVER_ERROR"
         http_status = response.status_code
-
     # ── Step 3 ──────────────────────────────────────────
     # Question 3: Are there FIELD-LEVEL errors?
     # Only ValidationError has these. Everything else → errors = None
