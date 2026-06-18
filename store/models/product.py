@@ -27,7 +27,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-# from store.managers.product import ProductManager
+from store.managers.product import ProductManager
 
 
 class Product(models.Model):
@@ -144,17 +144,17 @@ this file is for designign models for prduct info storing and related data
 class Product(models.Model):
 
     class Status(models.TextChoices):
-        Draft = "draft", "Draft"
-        Active = "acitve", "Active"
+        DRAFT = "draft", "Draft"
+        ACTIVE = "acitve", "Active"
 
     """uuid field avoid scraping from your website and it remain unique globally and it is difficult to guess and send data from front end """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.models.CharField(max_length=255, unique=True)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True)
     price = models.DecimalField(
         decimal_places=2, max_digits=10
     )  # user decimal field for prices to avoid float error and keep value shorten
-    stock = models.PositiveBigIntegerField()  # stock can not be negative
+    stock = models.PositiveBigIntegerField(default=0)  # stock can not be negative
 
     status = models.CharField(
         max_length=20,
@@ -182,6 +182,8 @@ class Review(models.Model):
     this model will be used to store reviews data and related things
     """
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     user = models.ForeignKey(
         User
     )  # rating must be assiciated with user no rating should be there when no user
@@ -200,4 +202,13 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        ordering = ["created _at"]
         unique_togather = ["user", "product"]
+
+        indexes = [
+            models.Index(fields=["user"]),
+            models.Index(fields=["product"]),
+        ]
+
+    def __str__(self):
+        return f"{self.user} , {self.rating}"
