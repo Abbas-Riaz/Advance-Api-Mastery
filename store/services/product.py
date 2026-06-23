@@ -83,7 +83,7 @@ def create_product(*, data: dict) -> Product:
 
 def update_product(*, product_id: uuid.UUID, data: dict) -> Product:
     """
-    Update an existing product's fields.
+    Update an existing product's field  s.
 
     Only updates the fields present in `data` — partial update pattern.
     Uses setattr() loop instead of Product.objects.filter().update() to:
