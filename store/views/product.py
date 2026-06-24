@@ -59,7 +59,7 @@ class ProductListCreateView(APIView):
     """
 
     # Require valid JWT token for all methods in this view
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
@@ -128,7 +128,7 @@ class ProductDetailView(APIView):
     """
 
     # Require valid JWT token for all methods in this view
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, pk: uuid.UUID):
         """

@@ -145,7 +145,7 @@ class Product(models.Model):
 
     class Status(models.TextChoices):
         DRAFT = "draft", "Draft"
-        ACTIVE = "acitve", "Active"
+        ACTIVE = "active", "Active"
         INACTIVE = "inactive", "Inactive"
 
     """uuid field avoid scraping from your website and it remain unique globally and it is difficult to guess and send data from front end """

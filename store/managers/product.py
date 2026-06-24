@@ -28,13 +28,13 @@ from datetime import timedelta
 
 class ProductQuerySet(models.QuerySet):
     def active(self):
-        return self.filter(status=self.Status.ACTIVE, stock__gt=0)
+        return self.filter(status=self.model.Status.ACTIVE, stock__gt=0)
 
     def inactive(self):
-        return self.filter(status=self.Status.INACTIVE)
+        return self.filter(status=self.model.Status.INACTIVE)
 
     def draft(self):
-        return self.filter(status=self.Status.DRAFT)
+        return self.filter(status=self.model.Status.DRAFT)
 
     def in_stock(self):
         return self.filter(stock__gt=0)
