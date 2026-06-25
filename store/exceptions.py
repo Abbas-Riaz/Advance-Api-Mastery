@@ -26,3 +26,9 @@ class ReviewNotFound(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = "review not found."
     default_code = "review_not_found"
+
+
+class ReviewAlreadyExists(APIException):
+    status_code = status.HTTP_409_CONFLICT
+    default_detail = "review already exists."
+    default_code = "review_already_exists"
