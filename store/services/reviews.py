@@ -49,7 +49,7 @@ def create_review(*, product_id, user, data) -> Review:
     return review
 
 
-def delete(*, review_id: uuid.UUID, user) -> None:
+def delete_review(*, review_id: uuid.UUID, user) -> None:
 
     review = get_review_by_id(
         review_id=review_id,
